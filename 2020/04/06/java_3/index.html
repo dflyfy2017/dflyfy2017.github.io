@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>设计模式 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="创建型模式1、单例模式（1）定义一个类只有一个实例，且该类能自行创建这个实例。
+（2）特点1、单例类只有一个实例对象；2、该单例对象必须由单例类自行创建；3、单例类对外提供一个访问该单例的全局访问点,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">设计模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">设计模式</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h1><h2 id="1、单例模式"><a href="#1、单例模式" class="headerlink" title="1、单例模式"></a>1、单例模式</h2><h3 id="（1）定义"><a href="#（1）定义" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>一个类只有一个实例，且该类能自行创建这个实例。</p>
+<h3 id="（2）特点"><a href="#（2）特点" class="headerlink" title="（2）特点"></a>（2）特点</h3><p>1、单例类只有一个实例对象；<br>2、该单例对象必须由单例类自行创建；<br>3、单例类对外提供一个访问该单例的全局访问点。  </p>
+<h3 id="（3）实现方式"><a href="#（3）实现方式" class="headerlink" title="（3）实现方式"></a>（3）实现方式</h3><p>第1种：懒汉式，该模式的特点是类加载时没有生成单例，只有当第一次调用getInstance方法时才去创建这个单例。</p>
+<pre><code>public class SingletonLazy {
+
+    // 保证在所有线程同步
+    private static volatile SingletonLazy instance;
+
+    private SingletonLazy(){}
+
+    public static synchronized SingletonLazy getInstance() {
+        if (instance == null) {
+            instance = new SingletonLazy();
+        }
+        return instance;
+    }
+
+}
+</code></pre><p>第2种：饿汉式，该模式的特点是类一旦加载就创建一个单例，保证在调用getInstance方法之前单例已经存在了。此单例模式在类创建的同时就已经创建好一个静态的对象供系统使用，以后也不再改变，所以是线程安全的，可以直接用于多线程。</p>
+<pre><code>public class HungrySingleton {
+
+    private static final HungrySingleton instance = new HungrySingleton();
+
+    private HungrySingleton(){}
+
+    public static HungrySingleton getInstance() {
+        return instance;
+    }
+}
+</code></pre><p>第3种：双检锁/双重校验锁（DCL，即double-checked locking）,这种方式采用双锁机制，安全且在多线程情况下能够保持高性能。</p>
+<pre><code>public class DCLSingleton {
+    private volatile static DCLSingleton instance;
+    private DCLSingleton(){}
+    public static DCLSingleton getInstance() {
+        if (instance == null) {
+            synchronized (DCLSingleton.class) {
+                if (instance == null) {
+                    instance = new DCLSingleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre><p>第4种：登记式/静态内部类，这种方式能达到双检锁方式一样的功效，但实现更简单。对静态域使用延迟初始化。这种方式同样利用了classloader机制来保证初始化instance时只有一个线程，他根饿汉式不同的时：饿汉式方式只要单例类被装载了，那么instance就会被实例化（没有达到懒加载效果），而这种方式是RegisterSingleton类被装载了，instance不一定被初始化。因为RegisterSingletonHolder类没有被主动使用，只有显式调用getInstance方法时，才会显式装载RegisterSingletonHolder类，从而实例化instance。</p>
+<pre><code>public class RegisterSingleton {
+    private static class RegisterSingletonHolder {
+        private static final RegisterSingleton instance = new RegisterSingleton();
+    }
+    private RegisterSingleton(){}
+    public static final RegisterSingleton getInstance() {
+        return RegisterSingletonHolder.instance;
+    }
+}
+</code></pre><p>第5种：枚举，这是实现单例模式的最佳方法，它更简洁，自动支持序列化机制，绝对防止多次实例化。</p>
+<pre><code>public class EnumSingleton {
+
+    private EnumSingleton(){}
+
+    // 定义一个静态枚举类
+    static enum SingletonHolderEnum {
+        // 创建一个枚举对象，该对象天生为单例
+        INSTANCE;
+        private EnumSingleton enumSingleton;
+        private SingletonHolderEnum() {
+            enumSingleton = new EnumSingleton();
+        }
+        public EnumSingleton getInstance() {
+            return enumSingleton;
+        }
+    }
+
+    // 对外暴露一个获取单例对象的静态方法
+    public static EnumSingleton getInstance() {
+        return SingletonHolderEnum.INSTANCE.getInstance();
+    }
+}   
+</code></pre><h2 id="2、原型模式"><a href="#2、原型模式" class="headerlink" title="2、原型模式"></a>2、原型模式</h2><h3 id="（1）定义-1"><a href="#（1）定义-1" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象。在这里，原型实例指定了要创建的对象的种类。用这种方式创建对象非常高效，根本无须知道对象创建的细节。</p>
+<h3 id="（2）结构"><a href="#（2）结构" class="headerlink" title="（2）结构"></a>（2）结构</h3><p>原型模式包含以下主要角色：<br>a.抽象原型类：规定了具体原型对象必须实现的接口。<br>b.具体原型类：实现抽象原型类的clone()方法，它是可被复制的对象。<br>c.访问类：使用具体原型类中的clone()方法来复制新的对象。  </p>
+<h3 id="（3）模式的实现"><a href="#（3）模式的实现" class="headerlink" title="（3）模式的实现"></a>（3）模式的实现</h3><p>原型模式的克隆分为浅克隆和深克隆，Java中Object类提供了浅克隆clone() 方法，具体原型类只要实现Cloneable接口就可以实现对象的浅克隆，这里的Cloneable接口就是抽象原型类。</p>
+<pre><code>static class RealizeType implements Cloneable {
+    RealizeType() {
+        System.out.println(&quot;具体原型类&quot;);
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        System.out.println(&quot;具体原型复制成功&quot;);
+        return (RealizeType) super.clone();
+    }
+}
+
+public static void main(String[] args) throws CloneNotSupportedException {
+    RealizeType obj1 = new RealizeType();
+    RealizeType obj2 = (RealizeType) obj1.clone();
+    System.out.println(obj1 == obj2);
+}
+</code></pre><h2 id="3、工厂方法模式"><a href="#3、工厂方法模式" class="headerlink" title="3、工厂方法模式"></a>3、工厂方法模式</h2><h3 id="（1）定义-2"><a href="#（1）定义-2" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>定义一个创建产品对象的工厂接口，将产品对象的实例创建工资推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。<br>我们把被创建的对象称为“产品”，把创建产品的对象称为“工厂”，</p>
+<h3 id="（2）优缺点"><a href="#（2）优缺点" class="headerlink" title="（2）优缺点"></a>（2）优缺点</h3><p>a.优点:  </p>
+<pre><code>- 用户只需要知道具体工厂的名称就可得到所要的产品，无须知道产品的具体创建过程；  
+- 在系统增加新的产品时只需要添加具体产品类和对应的具体工厂类，无须对原工厂镜像任何修改，满足开闭原则
+</code></pre><p>b.缺点：</p>
+<pre><code>每增加一个产品就要增加一个具体产品类和一个对应的具体工厂类，这增加了系统的复杂度。
+</code></pre><h3 id="（3）结构与实现"><a href="#（3）结构与实现" class="headerlink" title="（3）结构与实现"></a>（3）结构与实现</h3><p>工厂方法模式由抽象工厂、具体工厂、抽象产品和具体产品等4个要素构成。<br>a.抽象工厂：提供了创建产品的接口，调用者通过它访问具体工厂的工厂方法来创建产品。  b.具体工厂：主要是实现抽象工厂中的抽象方法，完成具体产品的创建。<br>c.抽象产品：定义了产品的规范，描述了产品的主要特征和功能。<br>d.具体产品：实现了抽象产品角色所定义的接口，由具体工厂来创建，它同具体工厂之间一一对应。  </p>
+<pre><code>// 抽象工厂
+interface AbstractFactory {
+    AbstractProduct newProduct();
+}
+
+static class ConcreteFactory1 implements AbstractFactory {
+
+    @Override
+    public AbstractProduct newProduct() {
+        System.out.println(&quot;具体工厂1-&gt;生成具体产品1.。。&quot;);
+        return new ConcreteProduct1();
+    }
+}
+
+static class ConcreteFactory2 implements AbstractFactory {
+
+    @Override
+    public AbstractProduct newProduct() {
+        System.out.println(&quot;具体工厂2-&gt;生成具体产品2.。。&quot;);
+        return new ConcreteProduct2();
+    }
+}
+
+// 抽象产品
+interface AbstractProduct {
+    void show();
+}
+
+//具体产品1
+static class ConcreteProduct1 implements AbstractProduct {
+
+    @Override
+    public void show() {
+        System.out.println(&quot;具体产品1.。。&quot;);
+    }
+}
+
+static class ConcreteProduct2 implements AbstractProduct {
+
+    @Override
+    public void show() {
+        System.out.println(&quot;具体产品2.。。&quot;);
+    }
+}
+
+public static void main(String[] args) {
+    AbstractFactory factory = new ConcreteFactory1();
+    ConcreteProduct1 product1 = (ConcreteProduct1) factory.newProduct();
+}
+</code></pre><h2 id="4、抽象工厂模式"><a href="#4、抽象工厂模式" class="headerlink" title="4、抽象工厂模式"></a>4、抽象工厂模式</h2><h3 id="（1）定义-3"><a href="#（1）定义-3" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无需指定所要产品的具体类就能得到同族的不同登记的产品的模式结构。<br>抽象工厂模式是工厂方法模式的升级版本，工厂方法模式只生产一个等级的产品，而抽象工厂模式可生产多个等级的产品。<br>使用抽象工厂模式一般要满足以下条件：<br>a.系统中有多个产品族，每个具体工厂创建同一族但属于不同等级结构的产品。<br>b.系统一次只可能消费其中某一族产品，即同族的产品一起使用。</p>
+<p>抽象工厂模式除了具有工厂方法模式的优点外，其他主要优点如下：<br>a.可以在类的内部对产品族中相关联的多等级产品共同管理，而不必引入多个新的类来进行管理。<br>b.当增加一个新的产品族时不需要修改源代码，满足开闭原则。  </p>
+<p>其缺点是：当产品族中需要增加一个新的产品时，所有的工厂类都需要进行修改。</p>
+<h3 id="（2）模式的结构与实现"><a href="#（2）模式的结构与实现" class="headerlink" title="（2）模式的结构与实现"></a>（2）模式的结构与实现</h3><p>模式的结构：</p>
+<pre><code>- 抽象工厂：提供了创建产品的接口，它包含多个创建产品的方法newProduct()，可以创建多个不同等级的产品。  
+- 具体工厂：主要时实现抽象工厂中的多个抽象方法，完成具体产品的创建。  
+- 抽象产品：定义了产品的规范，描述了产品的主要特征和功能，抽象工厂模式由多个抽象产品。  
+- 具体产品：实现了抽象产品角色所定义的接口，有具体工厂来创建，它同具体工厂之间是多对一的关系。 
+
+interface Factory {
+    AirCondition newAirCondition();
+    Tv newTv();
+}
+
+public interface AirCondition {
+    void show();
+}
+
+public interface Tv {
+    void show();
+}
+
+public class HrAirCondition implements AirCondition {
+    @Override
+    public void show() {
+        System.out.println(&quot;展示海尔空调...&quot;);
+    }
+}
+
+public class HrTv implements Tv {
+    @Override
+    public void show() {
+        System.out.println(&quot;海尔电视机...&quot;);
+    }
+}
+
+public class TclAirCondition implements AirCondition {
+    @Override
+    public void show() {
+        System.out.println(&quot;TCL空调...&quot;);
+    }
+}
+
+public class TclTv implements Tv {
+    @Override
+    public void show() {
+        System.out.println(&quot;展示TCL电视机...&quot;);
+    }
+}
+
+public class HaierFactory implements Factory {
+    @Override
+    public AirCondition newAirCondition() {
+        System.out.println(&quot;海尔工厂生产海尔空调&quot;);
+        return new HrAirCondition();
+    }
+
+    @Override
+    public Tv newTv() {
+        System.out.println(&quot;海尔工厂生产海尔电视机&quot;);
+        return new HrTv();
+    }
+}
+
+public class TclFactory implements Factory {
+    @Override
+    public AirCondition newAirCondition() {
+        System.out.println(&quot;TCL工厂生产TCL空调&quot;);
+        return new TclAirCondition();
+    }
+
+    @Override
+    public Tv newTv() {
+        System.out.println(&quot;TCL工厂生产TCL电视机&quot;);
+        return new TclTv();
+    }
+}
+</code></pre><h2 id="5、建造者模式"><a href="#5、建造者模式" class="headerlink" title="5、建造者模式"></a>5、建造者模式</h2><h3 id="（1）定义-4"><a href="#（1）定义-4" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>指将一个复杂对象的构造与它的表示分离，使用样的构造过程可以创建不同的表示，这样的设计模式被称为建造者模式。它是将一个复杂的对象分解为多个简单的对象，然后一步一步构建而成。它将变与不变分离，即产品的组成部分是不变的，但每一部分是可以灵活选择的。<br>该模式的主要优点如下：  】<br>a.给个具体的建造者相互独立，有利于系统的扩展。<br>b.客户端不必知道产品内部组成的细节，便于控制细节风险。  </p>
+<p>其缺点如下：<br>a.产品的组成部分必须相同，这限制了其使用范围。<br>b.如果产品的内部变化复杂，该模式会增加很多的建造者类。  </p>
+<p>建造者模式和工厂模式的关注点不同：建造者模式注重零部件的组装过程，而工厂方法模式更注重零部件的创建过程，但两者可以结合使用。  </p>
+<h3 id="（2）模式的结构与实现-1"><a href="#（2）模式的结构与实现-1" class="headerlink" title="（2）模式的结构与实现"></a>（2）模式的结构与实现</h3><p>模式的主要角色如下：  </p>
+<pre><code>- 产品角色：它是包含多个组成部件的复杂对象，由具体建造者来创建其各个部件。  
+- 抽象建造者：它是一个包含创建产品各个部件的抽象方法的接口，通常还包含一个返回复杂产品的方法。  
+- 具体建造者：实现builder接口，完成复杂产品的各个部件的具体创建方法。  
+- 指挥者：它调用建造者对象中的部件构造与装配方法完成复杂对象的创建，在指挥者中不涉及具体产品的信息。
+
+public abstract class Builder {
+    protected Product product = new Product();
+    public abstract void buildPartA();
+    public abstract void buildPartB();
+    public Product getProduct() {
+        return product;
+    }
+}
+
+public class ConcreteBuilder extends Builder {
+    @Override
+    public void buildPartA() {
+        product.setPartA(&quot;partA&quot;);
+    }
+
+    @Override
+    public void buildPartB() {
+        product.setPartB(&quot;partB&quot;);
+    }
+}
+
+public class Director {
+    private Builder builder;
+    public Director(Builder builder) {
+        this.builder = builder;
+    }
+    // 产品构建与组装方法
+    public Product construct() {
+        this.builder.buildPartA();
+        this.builder.buildPartB();
+        return this.builder.getProduct();
+    }
+}
+
+public class Product {
+
+    private String partA;
+    private String partB;
+
+    public void setPartA(String partA) {
+        this.partA = partA;
+    }
+
+    public void setPartB(String partB) {
+        this.partB = partB;
+    }
+
+    public void show() {
+        System.out.println(&quot;展示产品&quot;);
+    }
+}
+</code></pre><h1 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h1><h2 id="1、代理模式"><a href="#1、代理模式" class="headerlink" title="1、代理模式"></a>1、代理模式</h2><h3 id="（1）定义-5"><a href="#（1）定义-5" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>由于某些原因需要给某对象提供一个代理以控制该对象的访问。这时，访问对象不适合或者不能直接引用目标对象，代理对象作为对象和目标对象之间的中介。  </p>
+<p>代理模式的主要优点：<br>a.代理模式在客户端与目标对象之间起到一个中介作用和保护目标对象的作用；<br>b.代理对象可以扩展目标对象的功能；<br>c.代理模式能够将客户端与目标对象分离，在一定程度上降低了系统的耦合度；  </p>
+<p>其主要缺点是：<br>a.在客户端和目标对象之间增加一个代理对象，会造成请求处理速度变慢；<br>b.增加了系统的复杂度。  </p>
+<h3 id="（2）结构与实现"><a href="#（2）结构与实现" class="headerlink" title="（2）结构与实现"></a>（2）结构与实现</h3><p>代理模式的主要角色如下：  </p>
+<pre><code>- 抽象主题类：通过接口或抽象类声明真实主题和代理对象实现的业务方法。  
+- 真实主题类：实现了抽象主题中的具体业务，是代理对象所代表的真实对象，是最终要引用的对象。  
+- 代理类：提供了与真实主题相同的接口，其内部含有对真实主题的引用，它可以访问、控制或扩展真实主题的功能。  
+
+// 抽象主题
+public interface AbstractSubject {
+    void request();
+}
+
+// 真实主题
+public class RealSubject implements AbstractSubject {
+    @Override
+    public void request() {
+        System.out.println(&quot;访问真实主题方法。。。&quot;);
+    }
+}
+
+// 代理
+public class Proxy implements AbstractSubject {
+
+    private RealSubject realSubject;
+    @Override
+    public void request() {
+        if (realSubject == null) {
+            realSubject = new RealSubject();
+        }
+        preRequest();
+        realSubject.request();
+        postRequest();
+    }
+
+    private void postRequest() {
+        System.out.println(&quot;访问真实主题之前的处理...&quot;);
+    }
+
+    private void preRequest() {
+        System.out.println(&quot;访问注释主题之后的处理...&quot;);
+
+}
+</code></pre><h2 id="2、适配器模式"><a href="#2、适配器模式" class="headerlink" title="2、适配器模式"></a>2、适配器模式</h2><h3 id="（1）定义-6"><a href="#（1）定义-6" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。适配器模式分为类结构模式和对象结构模式两种，前者类之间的耦合度比后者高，且要求程序员了解现有组件库中的相关组件的内部结构，所以应用相对较少些。  </p>
+<p>该模式的主要优点如下：<br>a.客户端通过适配器可以透明地调用目标接口。<br>b.服用了现存的类，程序员不需要修改原有代码而重用现有的适配者类。<br>c.将目标类和适配者类解耦，解决了目标类和适配者类接口不一致的问题。  </p>
+<p>其缺点是：对类适配器来说，更换适配器的实现过程比较复杂。  </p>
+<h3 id="（2）模式的结构与实现-2"><a href="#（2）模式的结构与实现-2" class="headerlink" title="（2）模式的结构与实现"></a>（2）模式的结构与实现</h3><p>该模式包含以下主要角色：  </p>
+<pre><code>- 目标接口：当前系统业务所期待的接口，它可以是抽象类或接口。  
+- 适配者类：它是被访问和适配的现存组件库中的组件接口。  
+- 适配器类：它是一个转换器，通过继承或引用适配者的对象，把适配者接口转换成目标接口，让客户按目标的格式访问适配者。  
+</code></pre><p>类适配器模式：</p>
+<pre><code>// 目标接口
+public interface Target {
+    void request();
+}
+
+// 适配者接口
+public class Adaptor {
+    public void specificRequest() {
+        System.out.println(&quot;适配者中的业务代码被调用&quot;);
+    }
+}
+
+// 类适配器
+public class ClassAdaptor extends Adaptor implements Target {
+    @Override
+    public void request() {
+        specificRequest();
+    }
+}
+</code></pre><p>对象适配器模式：</p>
+<pre><code>// 对象适配器类
+public class ObjectAdaptor implements Target {
+
+    private Adaptor adaptor;
+
+    ObjectAdaptor(Adaptor adaptor) {
+        this.adaptor = adaptor;
+    }
+
+    @Override
+    public void request() {
+        adaptor.specificRequest();
+    }
+}
+</code></pre><h2 id="3、桥接模式"><a href="#3、桥接模式" class="headerlink" title="3、桥接模式"></a>3、桥接模式</h2><h3 id="（1）定义-7"><a href="#（1）定义-7" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>将抽象与实现分离，使他们可以独立变化。它是用组合关系代替继承关系来实现，从未降低了抽象和实现这两个可变维度的耦合度。</p>
+<p>该模式的优点是：<br>a.由于抽象与实现分离，所以扩展能力强。<br>b.其实现细节对客户透明。  </p>
+<p>其缺点是：<br>由于聚合关系建立在抽象层，要求开发者针对抽象化进行设计与编程，这增加了系统的理解与设计难度。  </p>
+<h2 id="（2）结构与实现-1"><a href="#（2）结构与实现-1" class="headerlink" title="（2）结构与实现"></a>（2）结构与实现</h2><p>该模式主要包含以下角色：  </p>
+<pre><code>- 抽象化角色：定义抽象类，并包括一个对实现化对象的引用。  
+- 扩展抽象化角色：是抽象化角色的子类，实现父类中的业务方法，并通过组合关系调用实现化角色中的业务方法。  
+- 实现化角色：定义实现化角色的接口，供扩展抽象化角色调用。  
+- 具体实现化角色：给出实现化角色接口的具体实现。 
+
+// 抽象化角色
+public abstract class Abstraction {
+    protected Implementor implementor;
+    Abstraction(Implementor implementor) {
+        this.implementor = implementor;
+    }
+    abstract void option();
+}
+
+// 实现化角色
+public interface Implementor {
+    public void operationImpl();
+}
+
+// 具体实现化角色
+public class ConcreteImplementor1 implements Implementor {
+    @Override
+    public void operationImpl() {
+        System.out.println(&quot;访问了具体实现化角色1...&quot;);
+    }
+}
+
+// 扩展抽象化角色
+public class RefinedAbstraction extends Abstraction {
+
+    RefinedAbstraction(Implementor implementor) {
+        super(implementor);
+    }
+    @Override
+    void option() {
+        System.out.println(&quot;扩展抽象化角色被访问&quot;);
+        implementor.operationImpl();
+    }
+}
+</code></pre><h2 id="4、装饰模式"><a href="#4、装饰模式" class="headerlink" title="4、装饰模式"></a>4、装饰模式</h2><h3 id="（1）定义-8"><a href="#（1）定义-8" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>指在不改变现有对象结构的情况下，动态地给该对象增加一些职责(即增加其额外功能)的模式。<br>该模式的主要优点有：<br>a.采用装饰模式扩展对象的功能比采用继承方式更加灵活。<br>b.可以设计出多个不同的具体装饰类，创造出多个不同行为的组合。  </p>
+<p>主要缺点是：装饰模式增加了许多子类，如果过度使用会使程序变得很复杂。  </p>
+<h3 id="（2）结构与实现-2"><a href="#（2）结构与实现-2" class="headerlink" title="（2）结构与实现"></a>（2）结构与实现</h3><p>该模式主要包含以下角色：  </p>
+<pre><code>- 抽象构件角色：定义一个抽象接口以规范准备接收附加责任的对象。  
+- 具体构件角色：实现抽象构件，通过装饰角色为其添加一些职责。  
+- 抽象装饰角色：继承抽象构件，并包含具体构件的实例，可以通过其子类扩展具体构件的功能。  
+- 具体装饰角色：实现抽象装饰的相关方法，并给具体构件对象添加附加的责任。  
+
+// 抽象装饰角色
+public class Decorator implements Component {
+
+    private Component component;
+
+    Decorator(Component component) {
+        this.component = component;
+    }
+
+    @Override
+    public void operation() {
+        component.operation();
+    }
+}
+
+// 抽象构件角色
+public interface Component {
+    void operation();
+}
+
+// 具体构件角色
+public class ConcreteComponent implements Component {
+
+    ConcreteComponent() {
+        System.out.println(&quot;创建具体构件角色&quot;);
+    }
+
+    @Override
+    public void operation() {
+        System.out.println(&quot;调用具体构件角色的方法operation&quot;);
+    }
+}
+
+// 具体装饰角色
+public class ConcreteDecorator extends Decorator {
+    ConcreteDecorator(Component component) {
+        super(component);
+    }
+
+    public void operation() {
+        super.operation();
+        addFunction();
+    }
+
+    private void addFunction() {
+        System.out.println(&quot;为具体构件角色增加额外的功能&quot;);
+    }
+
+}
+</code></pre><h2 id="5、外观模式"><a href="#5、外观模式" class="headerlink" title="5、外观模式"></a>5、外观模式</h2><h3 id="（1）定义-9"><a href="#（1）定义-9" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>是一种通过多个复杂的子系统提供一个一致的接口，而使这些子系统更加容易被访问的模式。该模式对外有一个统一接口，外部应用程序不用关心内部子系统的具体的细节，这样会大大降低应用程序的复杂度，提高了程序的可维护性。  </p>
+<p>外观模式是“迪米特法则”的典型应用，他有以下主要优点:<br>a.降低了子系统与客户端之间的耦合度，使得子系统的变化不会影响调用它的客户类。<br>b.对客户屏蔽了子系统组件，减少了客户处理的对象数目，并使得子系统使用起来更加容易。<br>c.降低了大型软件系统中的编译依赖性，简化了系统再不同平台之间的移植过程，因为编译一个子系统不会影响其他的子系统，特不会影响外观对象。  </p>
+<p>该模式的主要缺点:<br>a.不能很好地限制客户使用子系统类。<br>b.增加新的子系统可能需要修改外观类或客户端的源代码，违背了“开闭原则”。  </p>
+<h3 id="（2）结构与实现-3"><a href="#（2）结构与实现-3" class="headerlink" title="（2）结构与实现"></a>（2）结构与实现</h3><p>外观模式的结构比较简单，主要是定义了一个高层接口，它包含了对各个子系统的引用，客户端可以通过它访问各个子系统的功能。  </p>
+<p>该模式包含以下主要角色：  </p>
+<pre><code>- 外观角色：为多个子系统对外提供一个共同的接口。  
+- 子系统角色：实现系统的部分功能，客户可以通过外观角色访问它。  
+- 客户角色：通过一个外观角色访问各个子系统的功能。  
+
+// 子系统角色01
+public class SubSystem01 {
+    public void method1() {
+        System.out.println(&quot;子系统角色01的method1被调用&quot;);
+    }
+}
+
+// 子系统角色02
+public class SubSystem02 {
+    public void method2() {
+        System.out.println(&quot;子系统角色02的method2被调用&quot;);
+    }
+}
+
+// 子系统角色03
+public class SubSystem03 {
+    public void method3() {
+        System.out.println(&quot;子系统角色03的method3被调用&quot;);
+    }
+}
+
+// 外观角色
+public class Facade {
+    private SubSystem01 subSystem01 = new SubSystem01();
+    private SubSystem02 subSystem02 = new SubSystem02();
+    private SubSystem03 subSystem03 = new SubSystem03();
+
+    public void method() {
+        subSystem01.method1();
+        subSystem02.method2();
+        subSystem03.method3();
+    }
+}
+</code></pre><h2 id="6、享元模式"><a href="#6、享元模式" class="headerlink" title="6、享元模式"></a>6、享元模式</h2><h3 id="（1）定义-10"><a href="#（1）定义-10" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>运用共享技术来有效地支持大量细粒度对象的复用。它通过共享已经存在的对象来大幅度减少需要创建的对象数量、避免大量相识类的开销，从而提高系统资源的利用率。  </p>
+<p>享元模式的主要优点是：相同对象只要保存一份，这降低了系统中对象的数量，从而降低了系统中细粒度对象给内存带来的压力。  </p>
+<p>该模式的主要缺点呢是：<br>a.为了使对象可以共享，需要将一些不能共享的状态外部化，这将增加成都的复杂性。<br>b.读取享元模式的外部状态使得运行时间稍微变长。  </p>
+<h3 id="（2）结构与实现-4"><a href="#（2）结构与实现-4" class="headerlink" title="（2）结构与实现"></a>（2）结构与实现</h3><p>该模式的主要角色有如下：  </p>
+<pre><code>- 抽象享元角色：是所有的具体享元类的基类，为具体享元规范需要实现的公共接口，非享元的外部状态以参数的形式通过方法传入。  
+- 具体享元角色：实现抽象享元角色中所规定的接口。  
+- 非享元角色：是不可以共享的外部状态，它以参数的形式注入具体享元的相关方法中。  
+- 享元工厂角色：负责创建和管理享元角色。当客户对象请求一个享元对象时，享元工厂检查系统中是否存在符合要求的享元对象，如果存在则提供给客户；如果不存在的话，则创建一个新的享元对象。  
+
+// 非享元角色
+public class UnsharedConcreteFlyweight {
+    private String info;
+
+    UnsharedConcreteFlyweight(String info) {
+        this.info = info;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+}
+
+// 抽象享元角色
+public interface Flyweight {
+    public void operation(UnsharedConcreteFlyweight state);
+}
+
+// 具体享元角色
+public class ConcreteFlyweight implements Flyweight {
+
+    private String key;
+
+    ConcreteFlyweight(String key) {
+        this.key = key;
+        System.out.println(&quot;具体享元&quot; + key + &quot;被创建！&quot;);
+    }
+
+    @Override
+    public void operation(UnsharedConcreteFlyweight state) {
+        System.out.println(&quot;具体享元&quot; + key + &quot;被调用&quot;);
+        System.out.println(&quot;非享元信息是：&quot; + state.getInfo());
+    }
+}
+
+// 享元工厂角色
+public class FlyweightFactory {
+    private HashMap&lt;String, Flyweight&gt; flyweightMap = new HashMap&lt;&gt;();
+    public Flyweight getFlyweight(String key) {
+        if (flyweightMap.containsKey(key)) {
+            return flyweightMap.get(key);
+        } else {
+            Flyweight flyweight = new ConcreteFlyweight(key);
+            flyweightMap.put(key, flyweight);
+            return flyweight;
+        }
+    }
+}
+</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#创建型模式"><span class="toc-number">1.</span> <span class="toc-text">创建型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、单例模式"><span class="toc-number">1.1.</span> <span class="toc-text">1、单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义"><span class="toc-number">1.1.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）特点"><span class="toc-number">1.1.2.</span> <span class="toc-text">（2）特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（3）实现方式"><span class="toc-number">1.1.3.</span> <span class="toc-text">（3）实现方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、原型模式"><span class="toc-number">1.2.</span> <span class="toc-text">2、原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）结构"><span class="toc-number">1.2.2.</span> <span class="toc-text">（2）结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（3）模式的实现"><span class="toc-number">1.2.3.</span> <span class="toc-text">（3）模式的实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、工厂方法模式"><span class="toc-number">1.3.</span> <span class="toc-text">3、工厂方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）优缺点"><span class="toc-number">1.3.2.</span> <span class="toc-text">（2）优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（3）结构与实现"><span class="toc-number">1.3.3.</span> <span class="toc-text">（3）结构与实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、抽象工厂模式"><span class="toc-number">1.4.</span> <span class="toc-text">4、抽象工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）模式的结构与实现"><span class="toc-number">1.4.2.</span> <span class="toc-text">（2）模式的结构与实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、建造者模式"><span class="toc-number">1.5.</span> <span class="toc-text">5、建造者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-4"><span class="toc-number">1.5.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）模式的结构与实现-1"><span class="toc-number">1.5.2.</span> <span class="toc-text">（2）模式的结构与实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结构型模式"><span class="toc-number">2.</span> <span class="toc-text">结构型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、代理模式"><span class="toc-number">2.1.</span> <span class="toc-text">1、代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-5"><span class="toc-number">2.1.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）结构与实现"><span class="toc-number">2.1.2.</span> <span class="toc-text">（2）结构与实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、适配器模式"><span class="toc-number">2.2.</span> <span class="toc-text">2、适配器模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-6"><span class="toc-number">2.2.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）模式的结构与实现-2"><span class="toc-number">2.2.2.</span> <span class="toc-text">（2）模式的结构与实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、桥接模式"><span class="toc-number">2.3.</span> <span class="toc-text">3、桥接模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-7"><span class="toc-number">2.3.1.</span> <span class="toc-text">（1）定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）结构与实现-1"><span class="toc-number">2.4.</span> <span class="toc-text">（2）结构与实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、装饰模式"><span class="toc-number">2.5.</span> <span class="toc-text">4、装饰模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-8"><span class="toc-number">2.5.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）结构与实现-2"><span class="toc-number">2.5.2.</span> <span class="toc-text">（2）结构与实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、外观模式"><span class="toc-number">2.6.</span> <span class="toc-text">5、外观模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-9"><span class="toc-number">2.6.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）结构与实现-3"><span class="toc-number">2.6.2.</span> <span class="toc-text">（2）结构与实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、享元模式"><span class="toc-number">2.7.</span> <span class="toc-text">6、享元模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）定义-10"><span class="toc-number">2.7.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）结构与实现-4"><span class="toc-number">2.7.2.</span> <span class="toc-text">（2）结构与实现</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

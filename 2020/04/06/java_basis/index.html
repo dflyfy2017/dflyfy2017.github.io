@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java基础 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="基础基本数据类型  byte：8位，最大存储量是255，存放的数据范围是负128到127。  short：16位，最大存储量是65536，数据范围是负32768到32767。  int: 32位，最,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Java基础</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Java基础</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p>  byte：8位，最大存储量是255，存放的数据范围是负128到127。<br>  short：16位，最大存储量是65536，数据范围是负32768到32767。<br>  int: 32位，最大存储量是2的32次方减1，数据范围是负的2的31次方到正的2的31次方减1。<br>  long：64位，最大存储量是2的64次方减1，数据范围是负的2的63次方到正的2的63次方。<br>  float：32位，数据范围是3.4e-45~1.4e38，直接赋值是必须在数字后面加上f或F。<br>  double：64位，数据范围是4.9e-324~1.8e308，直接赋值是可以加d或D也可以不加。<br>  boolean: 只有true和false两个值。<br>  char：16位，存储Unicode码，用单引号赋值。</p>
+<h2 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h2><p>  包装类型是对基本类型不足之处的补充。<br>  基本数据类型的传递方式是值传递，而包装类型是引用传递，同时提供了很多数据类型间转换的方法。</p>
+<h2 id="JDK和JRE有什么区别"><a href="#JDK和JRE有什么区别" class="headerlink" title="JDK和JRE有什么区别"></a>JDK和JRE有什么区别</h2><p>  JDK：Java Development Kit 的简称，Java开发工具包，提供了Java的开发环境和运行环境。<br>  JRE：Java Runtime Environment 的简称，Java运行环境，位Java的运行提供了所需的环境。<br>  具体来说JDK其实包含了JRE，同时还包含了编译Java源码的编译器Javac，还包含了很多Java程序调试和分析的工具。简单来说：如果需要运行Java程序，只需要安装JRE就行，如果需要编写Java程序，需要安装JDK。</p>
+<h2 id="和equals的区别是什么"><a href="#和equals的区别是什么" class="headerlink" title="== 和equals的区别是什么"></a>== 和equals的区别是什么</h2><p>  ==解读：<br>  对于基本类型和引用类型 == 的作用效果是不同的，<br>  基本类型：比较的是值是否相同；<br>  引用类型：比较的是引用是否相同；<br>  示例:</p>
+<pre><code>String x = &quot;string&quot;;
+String y = &quot;string&quot;;
+String z = new String(&quot;string&quot;);
+Sout(x==y); // true
+Sout(x==z); // false
+Sout(x.equals(y)); // true
+Sout(x.equals(z)); // true
+</code></pre><p>  解读：因为x和y指向的是同一个引用，所以==是true，而new String()方法则重新开辟了内存空间，所以x==z结果为false，而equals比较的是值，所以结果都是true。  </p>
+<p>  equals解读：<br>  equals本质上就是==，只不过String和Integer等重写了equals方法，把它变成了值比较。</p>
+<pre><code>class Cat {
+    String name;
+
+    Cat(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+Cat cat = new Cat(&quot;a&quot;);
+Cat cat1 = new Cat(&quot;a&quot;);
+System.out.println(cat.equals(cat1));//false
+</code></pre><p>  输出结果是false？让我们看equals源码：</p>
+<pre><code>public boolean equals(Object obj) {
+    return (this == obj);
+}
+</code></pre><p>  我们看到equals本质上就是==</p>
+<p>  那么问题来了，两个值想同的string对象，为什么是true呢？</p>
+<pre><code>String s = new String(&quot;aaa&quot;);
+String s2 = new String(&quot;aaa&quot;);
+System.out.println(s.equals(s2));
+</code></pre><p>  我们进入String的equals源码：</p>
+<pre><code>public boolean equals(Object anObject) {
+    if (this == anObject) {
+        return true;
+    }
+    if (anObject instanceof String) {
+        String anotherString = (String)anObject;
+        int n = value.length;
+        if (n == anotherString.value.length) {
+            char v1[] = value;
+            char v2[] = anotherString.value;
+            int i = 0;
+            while (n-- != 0) {
+                if (v1[i] != v2[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+</code></pre><p>  可以看出String重写了equals方法，把引用比较改成了值比较。<br>  总结：== 对于基本类型来说是值比较，对于引用类型来说是引用的比较；而equals默认情况下是引用比较，只是很多类重写了equals方法，比如String、Integer等把它变成了值比较，所以一半情况下equals比较的是值是否相等。  </p>
+<h3 id="两个对象的hashCode-相同，则equals-也一定为true，对吗？"><a href="#两个对象的hashCode-相同，则equals-也一定为true，对吗？" class="headerlink" title="两个对象的hashCode()相同，则equals() 也一定为true，对吗？"></a>两个对象的hashCode()相同，则equals() 也一定为true，对吗？</h3><p>  不对，两个对象的ashCode()相同，则equals() 不一定为true<br>  示例：</p>
+<pre><code>String s = &quot;通话&quot;;
+String b = &quot;重地&quot;;
+System.out.println(String.format(&quot;s: %d | b: %d&quot;, s.hashCode(), b.hashCode()));// s: 1179395 | b: 1179395
+System.out.println(s.equals(b));// false
+</code></pre><p>  在散列表中，hashCode相等即两个键值对的哈希值相等，然而哈希值相等并不一定能得出键值相等。</p>
+<h2 id="final在Java中有什么作用"><a href="#final在Java中有什么作用" class="headerlink" title="final在Java中有什么作用"></a>final在Java中有什么作用</h2><p>  final修饰的类叫最终类，该类不能被继承，<br>  final修饰的方法不能被重写。<br>  final修饰的变量叫常量，常量必须被初始化，初始化后值就不能被修改。  </p>
+<h2 id="Java中的Math-round-1-5-等于多少"><a href="#Java中的Math-round-1-5-等于多少" class="headerlink" title="Java中的Math.round(-1.5)等于多少"></a>Java中的Math.round(-1.5)等于多少</h2><p>  等于-1，因为在数轴上取值是，中间值(0.5)向右取整，所以正0.5是向右取整，负0.5是直接舍弃。</p>
+<h2 id="Java中操作字符串都有哪些类？它们之间有什么区别？"><a href="#Java中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="Java中操作字符串都有哪些类？它们之间有什么区别？"></a>Java中操作字符串都有哪些类？它们之间有什么区别？</h2><p>  操作字符串的类有String、StringBuffer、StringBuilder。<br>  String和StringBuffer、StringBuilder的区别在于String声明的是不可改变的对象，每次操作都会生成新的String对象，然后将指针指向新的String对象，而StringBuffer、StringBuilder可以在原来对象的基础上进行操作，所以在经常改变字符串内容的情况下最好不要用String。<br>  StringBuffer和StringBuilder最大的区别在于，StringBuffer是线程安全的，而StringBuilder是非线程安全的，所以StringBuiler的性能高于StringBuffer，所以在不需要考虑线程的情况下推荐使用StringBuilder。</p>
+<h2 id="String-s-“i”-与-String-s-new-String-“i”-一样吗？"><a href="#String-s-“i”-与-String-s-new-String-“i”-一样吗？" class="headerlink" title="String s = “i” 与 String s = new String(“i”) 一样吗？"></a>String s = “i” 与 String s = new String(“i”) 一样吗？</h2><p>  不一样，因为内存的分配方式不一样。前一种方式，Java虚拟机会将其分配到常量池中；而后一种则会被分配到堆内存中。</p>
+<h2 id="如何将字符串反转"><a href="#如何将字符串反转" class="headerlink" title="如何将字符串反转"></a>如何将字符串反转</h2><p>  使用StringBuffer或StringBuilder的reverse()方法。 示例：</p>
+<pre><code>StringBuilder s = new StringBuilder().append(&quot;abc&quot;);
+System.out.println(s.reverse());//cba
+StringBuffer sa = new StringBuffer().append(&quot;qwe&quot;);
+System.out.println(sa.reverse());//ewq
+</code></pre><h2 id="String类的常用方法有哪些？"><a href="#String类的常用方法有哪些？" class="headerlink" title="String类的常用方法有哪些？"></a>String类的常用方法有哪些？</h2><p>  indexOf(); 返回指定字符的索引。<br>  chatAt(); 返回指定位置的字符。<br>  replace(); 字符串替换。<br>  trim(); 去掉字符串两端的空格。<br>  split(); 分割字符串，返回一个分割后的字符串数组。<br>  getBytes(); 返回字符串的byte类型数组。<br>  length(); 返回字符串的长度。<br>  toLowerCase(); 将字符串转成小写。<br>  toUpperCase(); 将字符串转成大写。<br>  substring(); 截取字符串。<br>  equals(); 字符串比较。  </p>
+<h2 id="抽象类必须要有抽象方法吗？"><a href="#抽象类必须要有抽象方法吗？" class="headerlink" title="抽象类必须要有抽象方法吗？"></a>抽象类必须要有抽象方法吗？</h2><p>  不需要，非必须</p>
+<h2 id="普通类与抽象类有哪些区别？"><a href="#普通类与抽象类有哪些区别？" class="headerlink" title="普通类与抽象类有哪些区别？"></a>普通类与抽象类有哪些区别？</h2><p>  普通类不能包含抽象方法，抽象类可以包含抽象方法。<br>  抽象类不能直接实例化，普通类可以直接实例化。</p>
+<h2 id="抽象类能使用final修饰吗？"><a href="#抽象类能使用final修饰吗？" class="headerlink" title="抽象类能使用final修饰吗？"></a>抽象类能使用final修饰吗？</h2><p>  不能，定义抽象类就是为了给其他类继承的，而final修饰的类是最终类，不能被继承，冲突，所以不能。</p>
+<h2 id="接口和抽象类有什么异同？"><a href="#接口和抽象类有什么异同？" class="headerlink" title="接口和抽象类有什么异同？"></a>接口和抽象类有什么异同？</h2><p>  实现：抽象类的子类使用extends来继承；接口使用implements来实现接口。<br>  构造函数：抽象类可以有构造函数，接口没有构造函数。<br>  main方法：抽象类可以有main方法，并且能够运行；接口不能有main方法。<br>  实现数量：类可以实现多个接口； 但是只能继承一个抽象类。<br>  访问修饰符：接口中的方法默认使用public修饰；抽象类中的方法可以实任意的访问修饰符。<br>  相同点：<br>  都不能被实例化。<br>  都拥有需要被实现的抽象方法。  </p>
+<h2 id="Java中IO流分为几种？"><a href="#Java中IO流分为几种？" class="headerlink" title="Java中IO流分为几种？"></a>Java中IO流分为几种？</h2><p>  按功能分：输入流（input）、输出流（output）<br>  按类型分：字节流和字符流<br>  字节流和字符流的区别是：字节流按8位传输以字节为单位输入输出数据，字符流按16位字符位单位输入输出数据。</p>
+<h2 id="BIO、NIO、AIO有什么区别"><a href="#BIO、NIO、AIO有什么区别" class="headerlink" title="BIO、NIO、AIO有什么区别"></a>BIO、NIO、AIO有什么区别</h2><p>  BIO：Block IO 同步阻塞IO，就是我们平常使用的传统IO，它的特点是模式简单使用方便，并发处理能力低。<br>  NIO：New IO 同步非阻塞IO，是传统IO的升级，客户端和服务器端通过Channel（通道）通讯，实现了多路复用。<br>  AIO：Asynchronous　IO　是NIO的升级，也叫NIO2，实现了异步非阻塞IO，异步IO的操作基于事件和回调机制。   </p>
+<h2 id="Files的常用方法有哪些？"><a href="#Files的常用方法有哪些？" class="headerlink" title="Files的常用方法有哪些？"></a>Files的常用方法有哪些？</h2><p>  Files.exists(); 检测文件路径是否存在。<br>  Files.createFile(); 创建文件。<br>  Files.createDirectory(); 创建文件夹。<br>  Files.delete(); 删除一个文件或目录。<br>  Files.copy(); 复制一个文件。<br>  Files.move(); 移动文件。<br>  Files.size(); 查看文件个数。<br>  Files.read(); 读取文件。<br>  Files.write(); 写入文件。  </p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>  List：有序、可重复，可以通过索引快速查找，但进行删除操作时后续的数据需要移动，所以增删速度慢。<br>  Set：无序、不可重复。<br>  Map：键值对、键唯一、值不唯一。  </p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>  新建状态：一个新产生的线程从新状态开始了它的生命周期。它保持这个状态直到程序start这个线程。<br>  运行状态：当一个新状态的线程被start后，线程变成可运行状态，一个线程在此状态下被认为是开始执行其任务，<br>  就绪状态：当一个线程等待另一个线程执行任务的时候，该线程就进入就绪状态，当另一个线程给就绪状态的线程发送信号时，该线程才重新切换到运行状态。<br>  休眠状态：由于一个线程的时间片用完了，该线程从运行状态进入休眠状态。当时间间隔到期或等待的时间发生了，该状态的线程切换到运行状态。<br>  终止状态：一个运行状态的线程完成任务或其他终止条件发生，该线程切换到终止状态。</p>
+<h1 id="热门问题"><a href="#热门问题" class="headerlink" title="热门问题"></a>热门问题</h1><h2 id="final、finally-和-finalize-的区别？"><a href="#final、finally-和-finalize-的区别？" class="headerlink" title="final、finally 和 finalize 的区别？"></a>final、finally 和 finalize 的区别？</h2><p>  final用于声明属性、方法和类，表示属性不可变，方法不可被重写，类不可被继承。<br>  finally是异常处理语句结构的一部分，表示总是执行。<br>  finalize是object类的一个方法，在垃圾收集器执行的时候会调用这个对象回收的方法。</p>
+<h2 id="ArrayList和LinkedList有何区别"><a href="#ArrayList和LinkedList有何区别" class="headerlink" title="ArrayList和LinkedList有何区别"></a>ArrayList和LinkedList有何区别</h2><p>  ArrayList是基于动态数组的数据结构，LinkedList是基于链表的数据结构；对于随机访问get和set，ArrayList较优，因为LinkedList要移动指针；对于新增和删除add和remove，LinkedList较优，因为ArrayList要移动数据。</p>
+<h2 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h2><p>  HashMap允许空键值，HashTable不允许。<br>  HashMap继承自AbstractMap，HashTable继承自Dictionary类，两个类都实现了Map接口；HashMap的方法是不同步的，HashTable的方法是同步的。</p>
+<h2 id="Iterator和ListIterator之间的区别"><a href="#Iterator和ListIterator之间的区别" class="headerlink" title="Iterator和ListIterator之间的区别"></a>Iterator和ListIterator之间的区别</h2><p>  Iterator用来遍历Set和List集合，而ListIterator只能遍历List；Iterator只可以向前遍历，而ListIterator可以双向遍历；ListIterator从Iterator接口继承，然后添加了一些额外的功能，比如添加一个元素，替换一个元素，获取前面或后面元素的位置等。</p>
+<h2 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h2><p>  继承Thread类<br>  实现Runnable接口<br>  使用Executor框架</p>
+<h2 id="wait-和-sleep-的区别"><a href="#wait-和-sleep-的区别" class="headerlink" title="wait() 和 sleep() 的区别"></a>wait() 和 sleep() 的区别</h2><p>  sleep来自Thread类，而wait来自object类。<br>  调用sleep方法，线程不会释放对象锁，而调用wait方法线程会释放对象锁。<br>  sleep睡眠后不会让出系统资源，wait让其他线程可以占用CPU。<br>  sleep(milliseconds)需要指定一个睡眠时间，时间一到会自动唤醒。而wait需要配合notify或者notifyall使用。  </p>
+<h2 id="JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？"><a href="#JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？" class="headerlink" title="JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？"></a>JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？</h2><p>  JSP是Servlet技术的扩展，本质上是Servlet的简易形式，更强调应用的外表表达，JSP编译后是“类Servlet”。Servlet和JSP最主要的不同点在于，Servlet的应用逻辑是在Java文件中，并且并且完全从表达层中的HTML中分离出来。而JSP的情况是Java和HTML可以组成一个扩展名为.jsp的文件。jsp侧重于视图，Servlet主要用于控制逻辑。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-number">1.1.</span> <span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包装类型"><span class="toc-number">1.2.</span> <span class="toc-text">包装类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK和JRE有什么区别"><span class="toc-number">1.3.</span> <span class="toc-text">JDK和JRE有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#和equals的区别是什么"><span class="toc-number">1.4.</span> <span class="toc-text">== 和equals的区别是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两个对象的hashCode-相同，则equals-也一定为true，对吗？"><span class="toc-number">1.4.1.</span> <span class="toc-text">两个对象的hashCode()相同，则equals() 也一定为true，对吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final在Java中有什么作用"><span class="toc-number">1.5.</span> <span class="toc-text">final在Java中有什么作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的Math-round-1-5-等于多少"><span class="toc-number">1.6.</span> <span class="toc-text">Java中的Math.round(-1.5)等于多少</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中操作字符串都有哪些类？它们之间有什么区别？"><span class="toc-number">1.7.</span> <span class="toc-text">Java中操作字符串都有哪些类？它们之间有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-s-“i”-与-String-s-new-String-“i”-一样吗？"><span class="toc-number">1.8.</span> <span class="toc-text">String s = “i” 与 String s = new String(“i”) 一样吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何将字符串反转"><span class="toc-number">1.9.</span> <span class="toc-text">如何将字符串反转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String类的常用方法有哪些？"><span class="toc-number">1.10.</span> <span class="toc-text">String类的常用方法有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象类必须要有抽象方法吗？"><span class="toc-number">1.11.</span> <span class="toc-text">抽象类必须要有抽象方法吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通类与抽象类有哪些区别？"><span class="toc-number">1.12.</span> <span class="toc-text">普通类与抽象类有哪些区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象类能使用final修饰吗？"><span class="toc-number">1.13.</span> <span class="toc-text">抽象类能使用final修饰吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口和抽象类有什么异同？"><span class="toc-number">1.14.</span> <span class="toc-text">接口和抽象类有什么异同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中IO流分为几种？"><span class="toc-number">1.15.</span> <span class="toc-text">Java中IO流分为几种？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BIO、NIO、AIO有什么区别"><span class="toc-number">1.16.</span> <span class="toc-text">BIO、NIO、AIO有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files的常用方法有哪些？"><span class="toc-number">1.17.</span> <span class="toc-text">Files的常用方法有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-number">1.18.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程"><span class="toc-number">1.19.</span> <span class="toc-text">多线程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#热门问题"><span class="toc-number">2.</span> <span class="toc-text">热门问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#final、finally-和-finalize-的区别？"><span class="toc-number">2.1.</span> <span class="toc-text">final、finally 和 finalize 的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList和LinkedList有何区别"><span class="toc-number">2.2.</span> <span class="toc-text">ArrayList和LinkedList有何区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap和HashTable的区别"><span class="toc-number">2.3.</span> <span class="toc-text">HashMap和HashTable的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Iterator和ListIterator之间的区别"><span class="toc-number">2.4.</span> <span class="toc-text">Iterator和ListIterator之间的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建线程的方式"><span class="toc-number">2.5.</span> <span class="toc-text">创建线程的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wait-和-sleep-的区别"><span class="toc-number">2.6.</span> <span class="toc-text">wait() 和 sleep() 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？"><span class="toc-number">2.7.</span> <span class="toc-text">JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

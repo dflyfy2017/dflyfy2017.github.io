@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>移位运算 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="负数的二进制示例：-5
+1、首先得到5的二进制数101,然后补零得到(一个整数按照绝对值大小转换成的二进制数，
+是为原码):
+  原码：0000 0101
+2、取反(0变1，1变0)，得到反码:
+ ,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">移位运算</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">移位运算</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="负数的二进制"><a href="#负数的二进制" class="headerlink" title="负数的二进制"></a>负数的二进制</h2><pre><code>示例：-5
+1、首先得到5的二进制数101,然后补零得到(一个整数按照绝对值大小转换成的二进制数，
+是为原码):
+  原码：0000 0101
+2、取反(0变1，1变0)，得到反码:
+  原码：0000 0101
+  反码：1111 1010
+3、然后加1(反码加1叫补码):
+  原码：0000 0101
+  反码：1111 1010
+  补码: 1111 1011
+补码(1111 1011)就是-5在计算机中的二进制表示方法，上面得到的是8位的-5，
+那么如果要表示16位的-5，在左边添上8个1即可:
+  1111 1111 1111 1011
+
+现在如果知道了一个二进制数，求它的十进制10数(对负数)
+  一个负数的二进制数: 1111 0011
+  按着上面的反方向来，先减1: 
+  负数: 1111 0011
+  减1 ：1111 0010
+  取反:
+  负数: 1111 0011
+  减1 ：1111 0010
+  取反: 0000 1101
+
+  取反得到的数(0000 1101)计算出来得到13，那么这个负数就是-13
+</code></pre><h2 id="小数与二进制转换"><a href="#小数与二进制转换" class="headerlink" title="小数与二进制转换:"></a>小数与二进制转换:</h2><pre><code>示例6.25
+6的二进制110，小数位换算(每次乘2, 不足1为0)
+  0.25*2 = 0.5 ==&gt; 0
+  0.5*2  = 1.0 ==&gt; 1
+最后得到6.25的二进制数: 110.01
+
+二进制转小数:
+ 0.01 ==&gt; 2^0 * 0 + 2^-1 * 0 + 2^-2 * 1 = 0.250
+</code></pre><h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="amp-按位与运算"><a href="#amp-按位与运算" class="headerlink" title="&amp;(按位与运算)"></a>&amp;(按位与运算)</h3><pre><code>&amp;(按位与)是把两个数的二进制按位与，两个为真才为真(1&amp;1=1)
+</code></pre><h3 id="amp-amp-逻辑与"><a href="#amp-amp-逻辑与" class="headerlink" title="&amp;&amp;(逻辑与)"></a>&amp;&amp;(逻辑与)</h3><pre><code>先运算左边的表达式，一旦为假，后续不管有多少表达式，均不在计算，结果为假，
+一个为真才计算右边的表达式，全为真才为真
+</code></pre><h3 id="按位或运算"><a href="#按位或运算" class="headerlink" title="|(按位或运算)"></a>|(按位或运算)</h3><pre><code>|(按位或)也是把两个数的二进制数按位做或运算, 一个为真即为真(1|0=1)
+</code></pre><h3 id="逻辑或"><a href="#逻辑或" class="headerlink" title="||(逻辑或)"></a>||(逻辑或)</h3><pre><code>一个为真即为真，后续不在计算，为假在计算后边的表达式
+</code></pre><h3 id="异或运算"><a href="#异或运算" class="headerlink" title="^(异或运算)"></a>^(异或运算)</h3><pre><code>异或运算，相同为0，不同为1，1^0=1, 1^1=0
+</code></pre><h3 id="lt-lt-左移运算符"><a href="#lt-lt-左移运算符" class="headerlink" title="&lt;&lt;(左移运算符)"></a>&lt;&lt;(左移运算符)</h3><pre><code>示例：5&lt;&lt;2
+把5的二进制位左移两位，右边补0, 5的二进制数为0000 0101，把有效值101左移
+两位就是0001 0100， 左边第一位正数补0，负数补1，等于乘了2多少次方
+</code></pre><h3 id="gt-gt-右移运算符"><a href="#gt-gt-右移运算符" class="headerlink" title="&gt;&gt;(右移运算符)"></a>&gt;&gt;(右移运算符)</h3><pre><code>示例：5&gt;&gt;2
+同样是对二进制数右移2位，0000 0101, 右移两位就是0000 0001，左边第一位正数补0，
+负数补1，等于除以2的n次方
+</code></pre><h3 id="取反运算符"><a href="#取反运算符" class="headerlink" title="~(取反运算符)"></a>~(取反运算符)</h3><pre><code>把二进制数按位取反
+</code></pre><h3 id="gt-gt-gt-无符号右移运算符"><a href="#gt-gt-gt-无符号右移运算符" class="headerlink" title="&gt;&gt;&gt;(无符号右移运算符)"></a>&gt;&gt;&gt;(无符号右移运算符)</h3><pre><code>&gt;&gt;&gt;(无符号右移运算符)与&gt;&gt;(右移运算符)的主要区别在于负数的运算，正数无符号右移是高位补0，
+移多少位补多少0
+对于负数的无符号右移：
+示例：-6&gt;&gt;&gt;3
+6的二进制取反在加1:  
+  0000 0000 0000 0000 0000 0000 0000 0110 取反
+  1111 1111 1111 1111 1111 1111 1111 1001 加1
+  1111 1111 1111 1111 1111 1111 1111 1010
+右移三位 
+  0001 1111 1111 1111 1111 1111 1111 1111
+</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#负数的二进制"><span class="toc-number">1.</span> <span class="toc-text">负数的二进制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小数与二进制转换"><span class="toc-number">2.</span> <span class="toc-text">小数与二进制转换:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-number">3.</span> <span class="toc-text">运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#amp-按位与运算"><span class="toc-number">3.1.</span> <span class="toc-text">&amp;(按位与运算)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#amp-amp-逻辑与"><span class="toc-number">3.2.</span> <span class="toc-text">&amp;&amp;(逻辑与)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按位或运算"><span class="toc-number">3.3.</span> <span class="toc-text">|(按位或运算)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑或"><span class="toc-number">3.4.</span> <span class="toc-text">||(逻辑或)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异或运算"><span class="toc-number">3.5.</span> <span class="toc-text">^(异或运算)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-lt-左移运算符"><span class="toc-number">3.6.</span> <span class="toc-text">&lt;&lt;(左移运算符)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gt-gt-右移运算符"><span class="toc-number">3.7.</span> <span class="toc-text">&gt;&gt;(右移运算符)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取反运算符"><span class="toc-number">3.8.</span> <span class="toc-text">~(取反运算符)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gt-gt-gt-无符号右移运算符"><span class="toc-number">3.9.</span> <span class="toc-text">&gt;&gt;&gt;(无符号右移运算符)</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

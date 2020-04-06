@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据库 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="事务的4种隔离级别Read uncommitted读未提交，顾名思义，就是可以读取未提交的数据。
+
+示例：原数据为50，事务A读取数据，与此同时事务B修改了数据为100，但是未提交，事务A读取到了1,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据库</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数据库</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="事务的4种隔离级别"><a href="#事务的4种隔离级别" class="headerlink" title="事务的4种隔离级别"></a>事务的4种隔离级别</h1><h2 id="Read-uncommitted"><a href="#Read-uncommitted" class="headerlink" title="Read uncommitted"></a>Read uncommitted</h2><pre><code>读未提交，顾名思义，就是可以读取未提交的数据。
+
+示例：原数据为50，事务A读取数据，与此同时事务B修改了数据为100，但是未提交，事务A读取到了100，此时事务B由于某些原因发生回滚，数据变回了50，实际数据还是原来的50，但是事务A读取的时事务B未提交的数据。这就是[脏读]。
+
+
+那怎么解决脏读呢？Read committed 读提交，能解决脏读问题
+</code></pre><h2 id="Read-committed"><a href="#Read-committed" class="headerlink" title="Read committed"></a>Read committed</h2><pre><code>读提交，顾名思义，就是一个事务要等另一个事务提交后才能读数据
+
+示例：付款买单时，收费系统预先检测余额为200，此时有另一个事务修改此数据为50，买单事务就会停下来，等待修改事务完成，修改事务提交完成，此时收费系统再次检测余额只有50了。
+这就是读提交，若有事务对数据进行更新操作时，读事务要等到这个更新操作完成后才能读取数据，可以解决脏读问题。但是却产生了[一个事务范围中前后查询返回了不同的数据]的问题，这就是不可重复读。
+
+那么怎么解决不可重复读呢？Repeatable read
+</code></pre><h2 id="Repeatable-read"><a href="#Repeatable-read" class="headerlink" title="Repeatable read"></a>Repeatable read</h2><pre><code>重复读，就是在读取数据时（事务开启）时，不允许修改数据
+
+示例：事务A读取数据时（事务开启），事务B进入（准备修改数据）但是已经有事务在使用此数据，那么事务B不能修改，事务A读取完成。
+
+重复读可以解决不可重复读问题。但是，不可重复读对应的是修改，即update，但是还可能发生[幻读]问题。
+
+什么是幻读：
+    事务A查询全部数据（事务开启，看到数据表中只有一条数据），此时事务B新增了一条数据（因为是新增 insert，不会阻塞）并提交，当事务A查询完成时发现有两条数据，似乎出现了幻觉，这就是幻读。
+
+那怎么解决幻读呢？Serializable
+</code></pre><h2 id="Serializable"><a href="#Serializable" class="headerlink" title="Serializable"></a>Serializable</h2><pre><code>Serializable 是最高的事务隔离级别，在该级别下，事务串行化顺序执行，可避免脏读、不可重复读和幻读，但是效率低下，比较耗数据库性能，一般不使用。
+</code></pre><h3 id="大多数数据库的事务隔离级别是Read-committed-，比如SQL-server，Oracle。MySQL的默认事务隔离级别是Repeatable。"><a href="#大多数数据库的事务隔离级别是Read-committed-，比如SQL-server，Oracle。MySQL的默认事务隔离级别是Repeatable。" class="headerlink" title="大多数数据库的事务隔离级别是Read committed ，比如SQL server，Oracle。MySQL的默认事务隔离级别是Repeatable。"></a>大多数数据库的事务隔离级别是Read committed ，比如SQL server，Oracle。MySQL的默认事务隔离级别是Repeatable。</h3><h1 id="MySQL之MVVC"><a href="#MySQL之MVVC" class="headerlink" title="MySQL之MVVC"></a>MySQL之MVVC</h1><h3 id="1、MVVC是什么？"><a href="#1、MVVC是什么？" class="headerlink" title="1、MVVC是什么？"></a>1、MVVC是什么？</h3><p>  MVVC是一种基于多版本的并发控制协议，只有在InnoDB引擎下存在。MVVC是为了实现事务的隔离性，通过版本号，避免同一数据在不同事务之间的竞争，你可以把它当作基于多版本的一种乐观锁。当然这种乐观锁只有在事务级别未提交锁和已提交锁时才会生效。MVCC最大的好处：读不加锁，读写不冲突</p>
+<h3 id="2、MVVC的实现机制"><a href="#2、MVVC的实现机制" class="headerlink" title="2、MVVC的实现机制"></a>2、MVVC的实现机制</h3><p>  InnoDB在每行数据都增加两个隐藏字段，一个记录创建的版本号，一个记录删除的版本号。<br>  在多版本并发控制中，为了保证数据操作在多线程过程中，保证事务隔离的机制，降低锁竞争的压力，保证较高的并发量。在每开启一个事务时，会生成一个事务的版本号，被操作的数据会生成一条新的数据行(临时)，但是在提交前对其他事务是不可见的，对于数据的更新（包括增删改）操作成功，会将这个版本号更新到数据的行中，事务提交成功，将新的版本号更新到此数据行中，这样就保证了每个事务操作的数据，都是互不影响的，也不存在锁的问题。</p>
+<h3 id="3、MVVC下的CRUD"><a href="#3、MVVC下的CRUD" class="headerlink" title="3、MVVC下的CRUD"></a>3、MVVC下的CRUD</h3><p>  SELECT:</p>
+<pre><code>当隔离级别是Repeatable read是select操作，InnoDB必须每行数据来保证它符合两个条件：
+1、InnoDB必须找到一个行的版本，它至少要和事务的版本一样老（即它的版本号不大于事务的版本号）。这保证了不管是事务开始之前，或者事务创建时，或者修改了这行数据的时候, 这行数据时存在的。
+2、这行数据的删除版本必须时未定义的或者比事务版本要打。这可以保证在事务开始之前这行数据没有被删除。符合这两个条件的行可能会被当作查询结果而返回。
+</code></pre><p>  INSERT:</p>
+<pre><code>InnoDB为这个新行记录当前的系统版本号。
+</code></pre><p>  DELETE：</p>
+<pre><code>InnoDB将当前的系统版本号设置为这一行的删除ID。
+</code></pre><p>  UPDATE:</p>
+<pre><code>InnoDB会写一个这行的数据拷贝，这个拷贝的版本为当前的系统版本号。它同时也会将这个版本号写到旧行的删除版本里。
+</code></pre><h1 id="数据库的范式"><a href="#数据库的范式" class="headerlink" title="数据库的范式"></a>数据库的范式</h1><h3 id="第一范式-属性的原子性"><a href="#第一范式-属性的原子性" class="headerlink" title="第一范式 属性的原子性"></a>第一范式 属性的原子性</h3><pre><code>数据库中的每一列都是不可分割的基本数据项，同一列中不能有多个值，确保列的原子性。
+</code></pre><h3 id="第二范式-属性完全依赖于主键"><a href="#第二范式-属性完全依赖于主键" class="headerlink" title="第二范式 属性完全依赖于主键"></a>第二范式 属性完全依赖于主键</h3><pre><code>要求数据库中每个实例或者叫做行可以被唯一区分，即表中要有一列属性可以将实体完全区分，这个属性就是主键，即实体的属性要完全依赖于主键。所谓完全依赖是指非主属性不能依赖与主键的部分属性，必须依赖于主键的所有属性。
+</code></pre><h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><pre><code>任何非主属性不依赖与其他非主属性，即数据不能存在传递关系，即每个属性都跟主键是直接关系而不是间接关系。例如学生表（学号，姓名，年龄，性别，所在院校，院校地址，院校电话）这样一个表结构，就存在上述关系，学号---&gt;所在院校---&gt;（院校地址，院校电话），这样的表结构应该拆分开来：  
+（学号，姓名，年龄，性别，所在院校）--（所在院校，院校地址，院校电话）。
+</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的4种隔离级别"><span class="toc-number">1.</span> <span class="toc-text">事务的4种隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Read-uncommitted"><span class="toc-number">1.1.</span> <span class="toc-text">Read uncommitted</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Read-committed"><span class="toc-number">1.2.</span> <span class="toc-text">Read committed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Repeatable-read"><span class="toc-number">1.3.</span> <span class="toc-text">Repeatable read</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Serializable"><span class="toc-number">1.4.</span> <span class="toc-text">Serializable</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大多数数据库的事务隔离级别是Read-committed-，比如SQL-server，Oracle。MySQL的默认事务隔离级别是Repeatable。"><span class="toc-number">1.4.1.</span> <span class="toc-text">大多数数据库的事务隔离级别是Read committed ，比如SQL server，Oracle。MySQL的默认事务隔离级别是Repeatable。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL之MVVC"><span class="toc-number">2.</span> <span class="toc-text">MySQL之MVVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、MVVC是什么？"><span class="toc-number">2.0.1.</span> <span class="toc-text">1、MVVC是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、MVVC的实现机制"><span class="toc-number">2.0.2.</span> <span class="toc-text">2、MVVC的实现机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、MVVC下的CRUD"><span class="toc-number">2.0.3.</span> <span class="toc-text">3、MVVC下的CRUD</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库的范式"><span class="toc-number">3.</span> <span class="toc-text">数据库的范式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一范式-属性的原子性"><span class="toc-number">3.0.1.</span> <span class="toc-text">第一范式 属性的原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二范式-属性完全依赖于主键"><span class="toc-number">3.0.2.</span> <span class="toc-text">第二范式 属性完全依赖于主键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三范式"><span class="toc-number">3.0.3.</span> <span class="toc-text">第三范式</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

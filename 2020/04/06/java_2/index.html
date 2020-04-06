@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java 基础2 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="1、Java的四个基本特征（1）抽象抽象是将一类对象的共同特征总结出来构造类的过程，包括数据抽象和行为抽象两个方面。抽象只关注对象有哪些属性和行为，并不关注这些行为的细节。（2）封装通常认为封装是把,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Java 基础2</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Java 基础2</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1、Java的四个基本特征"><a href="#1、Java的四个基本特征" class="headerlink" title="1、Java的四个基本特征"></a>1、Java的四个基本特征</h2><p>（1）抽象<br>抽象是将一类对象的共同特征总结出来构造类的过程，包括数据抽象和行为抽象两个方面。抽象只关注对象有哪些属性和行为，并不关注这些行为的细节。<br>（2）封装<br>通常认为封装是把数据和操作数据的方法绑定起来，对数据的访问只能通过已定义的接口。面向对象的本质就是将现实世界描绘成一系列完全自治、封闭的对象。我们在类中编写的方法就是对实现细节的一种封装；我们编写一个类就是对数据和数据操作的封装。可以说，封装就是隐藏一切可隐藏的东西，只对外界提供最简单的编程接口。<br>（3）继承<br>继承是从已有类得到继承信息创建新类的过程。提供继承信息的类叫做父类（或超类、基类），得到继承信息的类叫做子类（或派生类）。继承让变化中的软件有了一定的延续性，同时继承也是封装程序中可变因素的重要手段。<br>（4）多态<br>多态是指允许不同子类型的对象对同一消息做出不同的响应，即有不同的行为。多态的实现方式通常是通过方法重写（Method override）和方法重载（Method overload）实现。<br>a.方法重写是运行时的多态性（也称后绑定），是指子类对父类允许访问的方法的实现过程进行重新编写，参数和返回值都不变。即外壳不变，核心重写。重写不能抛出新的检查异常或者比被重写的方法申明的异常更加宽泛的异常。<br>b.方法重载是编译时的多态性（也称前绑定），是指在同一类里面，方法名相同，而参数列表不同，返回值可以相同也可以不同。最常见的就是构造函数的重载。<br>重载反映的是“随机应变”，同一项功能，根据参数不同，采用不同的处理方式，比如同样是吃饭，如果地点是高档西餐厅（参数），那么你就会穿正装（处理方式）；如果是吃火锅（参数），那么你就会穿的比较随意（处理方式）。<br>重写反映的是“父子差异”，比如你继承了父亲爱吃火锅的爱好，但是对于同一份火锅（参数相同），你喜欢红汤，你父亲喜欢清汤。  </p>
+<h2 id="2、面向对象和面向过程"><a href="#2、面向对象和面向过程" class="headerlink" title="2、面向对象和面向过程"></a>2、面向对象和面向过程</h2><p>面向过程就是分析出解决问题所需要的步骤，让后用函数把这些步骤一步一步实现；而面向对象则是以参与事件的角色（对象）为考虑问题的出发点。面向对象就是高度实物抽象化、面向过程就是自顶向下的编程。</p>
+<h2 id="3、面向对象开发的六个基本原则"><a href="#3、面向对象开发的六个基本原则" class="headerlink" title="3、面向对象开发的六个基本原则"></a>3、面向对象开发的六个基本原则</h2><p>（1）、单一职责原则：一个类只做它该做的事（高内聚），只有一个能引起它变化的原因。<br>（2）、开放封闭原则：软件实体应该对扩展开放，对修改关闭。  </p>
+<pre><code>对扩展开放：即扩展现行的模块，当我们软件的实际应用发生改变时，出现新的需求，就需要我们对模块进行扩展，使其能够满足新的需求。  
+对修改关闭：在扩展的时候不能对原有的功能进行修改。
+</code></pre><p>（3）、依赖倒置原则：高层模块不应该依赖底层模块。也就是接口编程，直白一点就是在声明方法的参数类型、放回的返回值类型、变量的引用类型时，尽可能的使用抽象类型而不用具体类型。<br>（4）、接口隔离原则：接口应该小而专，接口表示能力，那么一个接口只应该描述一种能力。<br>（5）、里氏替换原则：任何时候都可以用子类替换掉父类。子类一定是增加父类的能力，而不是减少父类的能力。<br>（6）、迪米特法则：最小依赖原则，一个类应该尽可能少地与其他类发生相互作用，使得系统功能模块相对独立。</p>
+<h2 id="4、static和final的区别和用途"><a href="#4、static和final的区别和用途" class="headerlink" title="4、static和final的区别和用途"></a>4、static和final的区别和用途</h2><p>static:</p>
+<pre><code>修饰变量：修饰的变量称为静态变量，随着类加载时完成初始化，内存中只有一个，且Java虚拟机只会为它分配一次内存，所有类共享静态变量。 
+
+修饰方法：在类加载的时侯就存在，不依赖于任何实例，static方法必须实现，不能用abstract修饰。  
+
+修饰代码块：在类加载完成后会执行代码块中的内容。  
+
+父类静态代码块-&gt;子类静态代码快-&gt;父类非静态代码块-&gt;父类构造方法-&gt;子类非静态代码块-&gt;子类构造方法
+</code></pre><p>final：</p>
+<pre><code>修饰变量：  
+编译期常量：类加载的过程完成初始化，编译后带入到任何计算式中，只能
+是基本类型。
+运行时常量：基本数据类型或引用数据类型，引用不可变，但引用的对象内容可变。  
+修饰方法：不能被继承，不能被子类修改。  
+修饰类：不能被继承。  
+修饰形参：final形参不可变
+</code></pre><h2 id="5、HashTable和HashMap的区别"><a href="#5、HashTable和HashMap的区别" class="headerlink" title="5、HashTable和HashMap的区别"></a>5、HashTable和HashMap的区别</h2><p>（1）、HashTable的方法是同步的，HashMap未同步，这个区别就像Vector和ArrayList一样。<br>（2）、HashTable不允许有null值（key和value都不可以），HashMap允许null值（key和value都可以，当然key为null的只能有一个）。<br>（3）、两者的遍历方式大同小异，HashTable仅仅比HashMap多了一个elements方法。<br>（4）、HashTable使用Enumeration，HashMap使用Iterator。<br>（5）、哈希值的使用不同，HashTable直接使用对象的hashCode，而HashMap重新计算hash值，而且用于代替求模。<br>（6）、HashTable的hash数组默认大小是11，增加方式是old*2+1，HashMap的hash数组默认大小是16，而且一定是2的指数。<br>（7）、HashTable基于Dictionary类，而HashMap基于AbstractMap类。  </p>
+<h2 id="6、HashMap和ConcurrentHashMap的区别"><a href="#6、HashMap和ConcurrentHashMap的区别" class="headerlink" title="6、HashMap和ConcurrentHashMap的区别"></a>6、HashMap和ConcurrentHashMap的区别</h2><p>（1）、ConcurrentHashMap将整个Hash桶进行了分段Segment，也就是将这个大的数组分成了几个小的片段segment，而且每个小的片段segment上面都有锁存在，那么在插入元素的时候就需要先找到应该插入到哪一个segment，然后再在这个小的片段上面进行插入，而且这里还需要获取segment锁。<br>（2）、ConcurrentHashMap让锁的粒度更精细一些，并发性能更好。<br>（3）、ConcurrentHashMap采用了锁分段技术，首先将数据一段一段的存储，然后给每一段都配一把锁，当一个线程占用锁访问其中一段数据的时候，其他段的数据也能被其他线程访问，不会产生竞争同一把锁，所以性能更好。  </p>
+<h2 id="7、Java实现多线程的三种方式和区别"><a href="#7、Java实现多线程的三种方式和区别" class="headerlink" title="7、Java实现多线程的三种方式和区别"></a>7、Java实现多线程的三种方式和区别</h2><p>（1）、继承Thread类，重写run方法<br>（2）、实现Runnable接口<br>（3）、实现Callable接口<br>区别：<br>a.实现Runnable接口可以避免Java单继承特性而带来的局限性；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的<br>b.继承Thread类和实现Runnable接口启动线程都是调用start方法，然后JVM虚拟机将此线程放到就绪队列中，如果有处理及可用，则执行run方法。<br>c.实现Callable接口重写call方法，并且线程执行完毕后会有返回值，其他两种没有返回值。  </p>
+<h2 id="8、线程安全"><a href="#8、线程安全" class="headerlink" title="8、线程安全"></a>8、线程安全</h2><p>定义：<br>a.某个类的行为与其规范一致。<br>b.不管多个线程是怎样的执行顺序和优先级，或是wait，sleep。join等控制方式，如果一个类在多线程访问下运转一切正常，并且访问类不需要进行额外的同步处理或者协调，那么我们就认为它是线程安全的。<br>如何保证线程安全：<br>a.对变量使用volatile<br>b.对程序段进行加锁synchronized,lock</p>
+<h2 id="9、sleep和wait分别是哪个类的方法，有什么区别"><a href="#9、sleep和wait分别是哪个类的方法，有什么区别" class="headerlink" title="9、sleep和wait分别是哪个类的方法，有什么区别"></a>9、sleep和wait分别是哪个类的方法，有什么区别</h2><p>a.sleep和wait：sleep是Thread类的方法，wait是Object类的方法<br>b.区别：  </p>
+<pre><code>sleep方法是线程类（Thread）的静态方法，调用此方法会让当前线程暂停执行指定的时间，将执行机会（CPU）让给其他线程，但是对象的锁依然保持，因此休眠时间结束后会自动恢复（线程回到就绪状态）。  
+wait是Object类的方法，调用对象的wait方法导致当前线程放弃对象的锁（线程暂停执行），进入对象的等待池，只有调用对象的notify方法（或notifyAll方法）时才能唤醒等待池中的线程进入等锁池，如果线程重新获得对象的锁就可以进入就绪状态。  
+</code></pre><h2 id="10、常见的异常"><a href="#10、常见的异常" class="headerlink" title="10、常见的异常"></a>10、常见的异常</h2><p>a.Throwable时Java语言中所有错误和异常的超类。它有两个子类：Error、Exception。<br>b.异常种类：<br>（1）Error：Error为错误，是程序无法处理的，如OutOfMemoryError、ThreadDeath等 ，出现这种情况只能交由JVM处理，不过大多数情况下会终止线程。<br>（2）Exception：Exception是程序可以处理的异常。它又分为两种CheckedException（受检异常），一种是UncheckedException（不受检异常）。  </p>
+<pre><code>CheckedException发生在编译阶段，必须要显示抛出异常（throws）或者使用try...catch，否则编译不通过。  
+UncheckedException发生在运行期，具有不确定性，主要是由于程序的逻辑问题引起的。
+</code></pre><h2 id="11、Java中NIO、BIO、AIO分别是什么？"><a href="#11、Java中NIO、BIO、AIO分别是什么？" class="headerlink" title="11、Java中NIO、BIO、AIO分别是什么？"></a>11、Java中NIO、BIO、AIO分别是什么？</h2><p>（1）BIO：同步并阻塞，服务器实现模式为一个连接一个线程，即客户端又连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。<br>（2）NIO：同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询连接有I/O请求时才启动一个线程进行处理。NIO方式适用于连接数据多且连接比较短（轻操作）的架构，比如聊天服务器。<br>（3）AIO：异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了在通知服务器应用去启动线程进行处理。AIO方式适用于连接数目多且连接比较长的架构，比如相册服务器。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Java的四个基本特征"><span class="toc-number">1.</span> <span class="toc-text">1、Java的四个基本特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、面向对象和面向过程"><span class="toc-number">2.</span> <span class="toc-text">2、面向对象和面向过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、面向对象开发的六个基本原则"><span class="toc-number">3.</span> <span class="toc-text">3、面向对象开发的六个基本原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、static和final的区别和用途"><span class="toc-number">4.</span> <span class="toc-text">4、static和final的区别和用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、HashTable和HashMap的区别"><span class="toc-number">5.</span> <span class="toc-text">5、HashTable和HashMap的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、HashMap和ConcurrentHashMap的区别"><span class="toc-number">6.</span> <span class="toc-text">6、HashMap和ConcurrentHashMap的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、Java实现多线程的三种方式和区别"><span class="toc-number">7.</span> <span class="toc-text">7、Java实现多线程的三种方式和区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、线程安全"><span class="toc-number">8.</span> <span class="toc-text">8、线程安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、sleep和wait分别是哪个类的方法，有什么区别"><span class="toc-number">9.</span> <span class="toc-text">9、sleep和wait分别是哪个类的方法，有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10、常见的异常"><span class="toc-number">10.</span> <span class="toc-text">10、常见的异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11、Java中NIO、BIO、AIO分别是什么？"><span class="toc-number">11.</span> <span class="toc-text">11、Java中NIO、BIO、AIO分别是什么？</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

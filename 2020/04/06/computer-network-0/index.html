@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>计算机网络 -- UDP与TCP - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="
+OSI参考模型(七层模型)与TCP/IP五层模型OSI参考模型(七层模型)TCP/IP五层模型应用层应用层表示层会话层传输层网络层数据链路层物理层
+
+
+UDP(User Datagram Prot,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">计算机网络 -- UDP与TCP</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">计算机网络 -- UDP与TCP</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <hr>
+<h3 id="OSI参考模型-七层模型-与TCP-IP五层模型"><a href="#OSI参考模型-七层模型-与TCP-IP五层模型" class="headerlink" title="OSI参考模型(七层模型)与TCP/IP五层模型"></a>OSI参考模型(七层模型)与TCP/IP五层模型</h3><table style="text-align:center"><thead><th>OSI参考模型(七层模型)</th><th>TCP/IP五层模型</th></thead><tbody><tr><td>应用层</td><td rowspan="3">应用层</td></tr><tr><td>表示层</td></tr><tr><td>会话层</td></tr><tr><td colspan="2">传输层</td></tr><tr><td colspan="2">网络层</td></tr><tr><td colspan="2">数据链路层</td></tr><tr><td colspan="2">物理层</td></tr></tbody></table>
+
+<hr>
+<h2 id="UDP-User-Datagram-Protocol，用户数据报协议"><a href="#UDP-User-Datagram-Protocol，用户数据报协议" class="headerlink" title="UDP(User Datagram Protocol，用户数据报协议)"></a>UDP(User Datagram Protocol，用户数据报协议)</h2><h3 id="UDP在IP报文中的位置"><a href="#UDP在IP报文中的位置" class="headerlink" title="UDP在IP报文中的位置"></a>UDP在IP报文中的位置</h3><table style="text-align:center"><tr><td colspan="3">IP数据包</td></tr><tr><td></td><td colspan="2">UDP报文</td></tr><tr><td>IP数据包头</td><td>UDP报头</td><td>UDP数据</td></tr><tr><td>20字节</td><td>8字节</td><td></td></tr></table>
+
+<h3 id="UDP的特点"><a href="#UDP的特点" class="headerlink" title="UDP的特点"></a>UDP的特点</h3><ol>
+<li>UDP是『无连接的』<br> 通信前不需要建立连接，通信结束也无需释放连接，因此减少了开销和发送数据之前的时延</li>
+<li>UDP是不可靠的<br> 它是『尽最大努力交付』，即不保证可靠交付，因此主机不需要维持复杂的连接状态表</li>
+<li>UDP是『面向报文的』<br> 发送发的UDP对应用程序交下来的报文，在添加首部后就向下交付IP层。UDP对应用层交下来的报文，既不合并，也不拆分，而是保留这些报文的边界。<br> 这就是说，应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。<br> 因此，报文的长度必须合适，若报文太长，UDP把它交给IP层后，IP层在传送时可能要进行分片，这会降低IP层的效率，反之，若报文太短，UDP把它交给IP层后，会使IP数据报的首部的相对长度太大，这也降低了IP层的效率。</li>
+<li>UDP『没有拥塞控制』<br> UDP始终以恒定的速率发送数据，并且不会根据网络拥塞情况对发送速率进行调整。这种方式有利有弊<br> 弊端：网络拥塞可能导致有些报文丢失，因此UDP不可靠<br> 有点：某些场景允许报文丢失，如：直播、语音通话等，但对实时性要求很高，此时UDP便能发挥它的特点</li>
+<li>UDP支持一对一、一对多、多对多、多对一的交互通信</li>
+<li>UDP首部开销小，只有8字节。<br> 而TCP头部至少由20个字节，相比TCP要高效很多。</li>
+</ol>
+<hr>
+<h3 id="UDP的首部格式"><a href="#UDP的首部格式" class="headerlink" title="UDP的首部格式"></a>UDP的首部格式</h3><p>UDP报头由4个域组成，其中每个域各占用2个字节：</p>
+<table style="text-align:center"><tr><td>16位源端口号</td><td>16位目的端口号</td></tr><tr><td>16位UDP长度</td><td>16位UDP检验和</td></tr></table>
+
+
+
+<h2 id="TCP-Transmission-Control-Protocol，传输控制协议"><a href="#TCP-Transmission-Control-Protocol，传输控制协议" class="headerlink" title="TCP(Transmission Control Protocol，传输控制协议)"></a>TCP(Transmission Control Protocol，传输控制协议)</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li>TCP是『面向连接的运输层协议』<br> 这就是说，应用程序在使用TCP协议之前需要建立连接，在传送数据完毕后需要释放连接</li>
+<li>TCP提供『可靠交付』的服务<br> 所谓可靠是指：TCP发送的数据无差错、不丢失、不重复、并且按序到达。</li>
+<li>TCP是『面向字节流的』<br> 『流』指的是流入到进程或从进程流出的字节序列。<br> 面向字节流的含义是：虽然应用程序和TCP的交互式一次一个数据块（大小不等），但TCP把应用程序交下来的数据看成仅仅是一连串的无结构的字节流。</li>
+<li>TCP提供『全双工通信』<br> TCP的两端既可以作为发送端，也可以作为接收端</li>
+<li>一条TCP连接的两端只能有两个端点<br> TCP只能提供点到点的通信，而UDP可以任意方式的通信</li>
+</ol>
+<h3 id="TCP连接与套接字-socket"><a href="#TCP连接与套接字-socket" class="headerlink" title="TCP连接与套接字(socket)"></a>TCP连接与套接字(socket)</h3><ul>
+<li>『TCP连接』<br>  是一种抽象的概念，表示一条可以通信的链路。</li>
+<li>『套接字』或『插口』<br>  一条TCP连接的两端就是两个套接字<pre><code>套接字=『IP地址』:『端口号』
+</code></pre>  因此，可以形象的表示出：<pre><code>TCP连接 ::= {套接字0，套接字1}={(IP0:端口0)，(IP1:端口1)}
+</code></pre></li>
+</ul>
+<h3 id="TCP头部"><a href="#TCP头部" class="headerlink" title="TCP头部"></a>TCP头部</h3><table style="text-align:center"><tr><td>偏移</td><td>0-3</td><td>4-7</td><td>8-15</td><td>16-31</td></tr><tr><td>0</td><td colspan="3">源端口</td><td>目的端口</td></tr><tr><td>32</td><td colspan="4">序号</td></tr><tr><td>64</td><td colspan="4">确认序号</td></tr><tr><td>96</td><td>报头长度</td><td>保留</td><td>标识符</td><td>窗口大小</td></tr><tr><td>128</td><td colspan="3">检验和</td><td>紧急指针</td></tr><tr><td>160</td><td colspan="4">选项字段</td></tr><tr><td>160/192+</td><td colspan="4">数据</td></tr></table>
+
+<ul>
+<li>源端口/目的端口<br>  各占2个字节</li>
+<li>序号<br>  占4个字节。在一个TCP连接中传送的字节流中的每一个都按顺序编号。整个要传送的字节流的起始序号必须在连接建立时设置。首部中的序号字段值则指的是本报文段所发送的数据的第一个字节的序号。</li>
+<li>确认序号<br>  占4字节，是期望收到对方的下一个报文段的第一个数据字节的序号。</li>
+<li>数据偏移(报头长度)<br>  占4位，它指出TCP报文段的数据起始处距离TCP报文段的起始处有多远。这个字段实际上是指出TCP报文段的首部长度。</li>
+<li>标识符<br>  TCP有7种标识符，用于表示TCP报文的性质<pre><code>URG：标识紧急指针是否有效
+ACK：标识确认序号是否有效
+PSH：用来提示接收端应用程序立刻将数据从TCP缓冲区读走
+RST：要求重新建立连接，我们把含有RST标识的报文称为复位报文段
+SYN：请求建立连接，我们把含有SYN标识的报文称为同步报文段
+FIN：同时对端，本端即将关闭，我们把含有FIN标识的报文称为结束报文
+</code></pre></li>
+<li>窗口大小<br>  占2字节，指的是发送本报文段的一方的接受窗口（而不是自己的发送窗口）。窗口值告诉对方：从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量。总之，窗口值作为接收方让发送方设置其发送窗口的依据。</li>
+<li>检验和<br>  占2字节，用于接收端检验整个数据报在传输过程中是否出错</li>
+<li>紧急指针<br>  占2字节，用于标识紧急数据的尾部</li>
+<li>选项字段<br>  顾名思义，该字段为可选字段，且长度可变，最长40字节。</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI参考模型-七层模型-与TCP-IP五层模型"><span class="toc-number">1.</span> <span class="toc-text">OSI参考模型(七层模型)与TCP/IP五层模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP-User-Datagram-Protocol，用户数据报协议"><span class="toc-number"></span> <span class="toc-text">UDP(User Datagram Protocol，用户数据报协议)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP在IP报文中的位置"><span class="toc-number">1.</span> <span class="toc-text">UDP在IP报文中的位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP的特点"><span class="toc-number">2.</span> <span class="toc-text">UDP的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP的首部格式"><span class="toc-number">3.</span> <span class="toc-text">UDP的首部格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-Transmission-Control-Protocol，传输控制协议"><span class="toc-number"></span> <span class="toc-text">TCP(Transmission Control Protocol，传输控制协议)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特点"><span class="toc-number">1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP连接与套接字-socket"><span class="toc-number">2.</span> <span class="toc-text">TCP连接与套接字(socket)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP头部"><span class="toc-number">3.</span> <span class="toc-text">TCP头部</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
