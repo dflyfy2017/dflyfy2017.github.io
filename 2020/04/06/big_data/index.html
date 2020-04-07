@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大数据 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="hadoop一、hadoop是什么hadoop是一个在分布式服务器集群上存储海量数据并运行分布式分析应用的开源框架。
+二、核心hadoop的核心部件是HDFS与MapReduceHDFS为海量数据提,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">大数据</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">大数据</h1>
+        <div class="stuff">
+            <span>四月 06, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="hadoop"><a href="#hadoop" class="headerlink" title="hadoop"></a>hadoop</h2><h3 id="一、hadoop是什么"><a href="#一、hadoop是什么" class="headerlink" title="一、hadoop是什么"></a>一、hadoop是什么</h3><p>hadoop是一个在分布式服务器集群上存储海量数据并运行分布式分析应用的开源框架。</p>
+<h3 id="二、核心"><a href="#二、核心" class="headerlink" title="二、核心"></a>二、核心</h3><p>hadoop的核心部件是HDFS与MapReduce<br>HDFS为海量数据提供了存储，可以理解为一个分布式的，有冗余备份的，可以动态扩展的用来存储大规模数据的大硬盘。<br>MapReduce为海量的数据提供了计算，可以理解为一个计算引擎，按照MapReduce的规则编写计算/Reduce计算的程序，可以完成计算任务。</p>
+<h3 id="三、能干什么"><a href="#三、能干什么" class="headerlink" title="三、能干什么"></a>三、能干什么</h3><p>hadoop擅长日志分析<br>大数据分布式存储<br>ETL：数据抽取到Oracle、MySQL、db2、mongDb及主流数据库<br>机器学习：比如Apache Mahout项目<br>搜索引擎：Hadoop + lucene实现<br>数据挖掘：目前比较流行的广告推荐，个性化广告等。</p>
+<h2 id="spark"><a href="#spark" class="headerlink" title="spark"></a>spark</h2><h3 id="一、spark是什么"><a href="#一、spark是什么" class="headerlink" title="一、spark是什么"></a>一、spark是什么</h3><p>spark是基于内存计算的大数据并行计算框架，可用于构建大型的、低延迟的数据分析应用。</p>
+<h3 id="二、特点"><a href="#二、特点" class="headerlink" title="二、特点"></a>二、特点</h3><p>（1）运行速度快：spark使用先进的DAG（Directed Acyclic Graph，有向无环图）执行引擎，以支持循环数据流与内存计算，基于内存的执行速度可比hadoop MapReduce快上百倍，基于磁盘的执行速度也能快十倍。<br>（2）容易使用：spark支持使用Scala、Java、python和R语言进行编程，简洁的API设计有助于用户轻松构建并行程序，并且可以通过spark shell进行交互式编程。<br>（3）通用性：spark提供了完整而强大的技术栈，包括SQL查询、流式计算、机器学习和图算法组件，这些组件可以无缝整合在同一个应用中，足以应对复杂的计算；<br>（4）运行模式多样：spark可运行于独立的集群模式中，或者运行于hadoop中，也可运行于Amazon EC2等云环境中，并且可以访问HDFS、Cassanda、HBase、Hive等多种数据源。  </p>
+<h3 id="三、spark相对于hadoop的优势"><a href="#三、spark相对于hadoop的优势" class="headerlink" title="三、spark相对于hadoop的优势"></a>三、spark相对于hadoop的优势</h3><p>hadoop虽然已经成为大数据技术的事实标准，但其本身还存在诸多缺陷，最主要的缺陷是其MapReduce计算模型延迟过高，无法胜任实时、快速计算的要求，因而只适用于离线批处理的应用场景。<br>spark的计算模式也属于MapReduce，但不局限于Map和Reduce操作，还提供了多种数据集操作类型，编程模型比MapReduce更灵活；<br>spark提供了内存计算，中间结果直接放到内存中，带来了更高的迭代运算效率；<br>spark基于DAG的任务调度执行机制，要优于MapReduce的迭代执行机制。<br>spark最大的特点就是将计算数据、中间结果都存储在内存中，大大减少了IO开销。<br>spark提供了多种高层次、简洁的API，通常情况下，对于实现相同功能的应用程序，spark的代码量比Hadoop少2-5倍。<br>但是spark并不能完全替代hadoop，主要用于替代hadoop中的MapReduce计算模型。实际上，spark已经很好地融入了Hadoop生态圈，并成为了其中的重要一员，它可以借助YARN实现资源调度管理，借助与HDFS实现分布式存储。  </p>
+<h2 id="Neo4j"><a href="#Neo4j" class="headerlink" title="Neo4j"></a>Neo4j</h2><h3 id="一、Neo4j是什么"><a href="#一、Neo4j是什么" class="headerlink" title="一、Neo4j是什么"></a>一、Neo4j是什么</h3><p>Neo4j是一个高性能的，Nosql图形数据库，它将结构化数据存储在网络上而不是表中。它是一个嵌入式的、基于磁盘的、具备完全的事务特性的Java持久化引擎，但是它将结构化数据存储在网络（从数学的角度叫做图）上而不是表中。它也可以被看作是一个高性能的图引擎，该引擎具有成熟数据库的所有特性。例如：<br>对于一个社交网络的用户数据库，你除了要存储每个用户的姓名、性别、喜好这些基本信息外，你还需要存储一个用户和哪些用户是朋友等这些关系。</p>
+<h2 id="MPP"><a href="#MPP" class="headerlink" title="MPP"></a>MPP</h2><h3 id="一、MPP是什么"><a href="#一、MPP是什么" class="headerlink" title="一、MPP是什么"></a>一、MPP是什么</h3><p>MPP（Massively Parallel Processing），即大规模并行处理，在数据库非共享集群中，每个节点都有独立的磁盘存储系统和内存系统，业务数据根据数据库模型和应用特点划分到各个节点上，每台数据节点通过专用网络或者商业通用网络互相连接，彼此协同计算，作为整体提供数据库服务。<br>简单来说，MPP是将任务并行的分割到多个服务器节点上，在每个节点上计算完成后，将各自部分的结果汇总在一起得到最终的结果。</p>
+<h3 id="二、MPP架构特征"><a href="#二、MPP架构特征" class="headerlink" title="二、MPP架构特征"></a>二、MPP架构特征</h3><p>任务并行执行<br>数据分布式存储（本地化）<br>分布式计算<br>私有资源<br>横向扩展<br>Shared Nothing架构</p>
+<h2 id="flyway"><a href="#flyway" class="headerlink" title="flyway"></a>flyway</h2><h3 id="一、flyway是什么"><a href="#一、flyway是什么" class="headerlink" title="一、flyway是什么"></a>一、flyway是什么</h3><p>flyway是一款数据库版本控制管理工具</p>
+<h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><h3 id="一、Elasticsearch是什么"><a href="#一、Elasticsearch是什么" class="headerlink" title="一、Elasticsearch是什么"></a>一、Elasticsearch是什么</h3><p>Elasticsearch是一个分布式、RESTFul风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='/../mby-br.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='/../sdd-zszy.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hadoop"><span class="toc-number">1.</span> <span class="toc-text">hadoop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、hadoop是什么"><span class="toc-number">1.1.</span> <span class="toc-text">一、hadoop是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、核心"><span class="toc-number">1.2.</span> <span class="toc-text">二、核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、能干什么"><span class="toc-number">1.3.</span> <span class="toc-text">三、能干什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spark"><span class="toc-number">2.</span> <span class="toc-text">spark</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、spark是什么"><span class="toc-number">2.1.</span> <span class="toc-text">一、spark是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特点"><span class="toc-number">2.2.</span> <span class="toc-text">二、特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、spark相对于hadoop的优势"><span class="toc-number">2.3.</span> <span class="toc-text">三、spark相对于hadoop的优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Neo4j"><span class="toc-number">3.</span> <span class="toc-text">Neo4j</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Neo4j是什么"><span class="toc-number">3.1.</span> <span class="toc-text">一、Neo4j是什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPP"><span class="toc-number">4.</span> <span class="toc-text">MPP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、MPP是什么"><span class="toc-number">4.1.</span> <span class="toc-text">一、MPP是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、MPP架构特征"><span class="toc-number">4.2.</span> <span class="toc-text">二、MPP架构特征</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flyway"><span class="toc-number">5.</span> <span class="toc-text">flyway</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、flyway是什么"><span class="toc-number">5.1.</span> <span class="toc-text">一、flyway是什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Elasticsearch"><span class="toc-number">6.</span> <span class="toc-text">Elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Elasticsearch是什么"><span class="toc-number">6.1.</span> <span class="toc-text">一、Elasticsearch是什么</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
